@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">SmartHouseRemote</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="credentials_header">Credentials</string>
+
+    <!-- Host /  User / Password -->
+    <string name="server_url">Server URL</string>
+    <string name="username">User name</string>
+    <string name="password">Password</string>
+
+    <string name="gate">Gate</string>
+    <string name="door">Door</string>
+    <string name="status">Status</string>
+</resources>
