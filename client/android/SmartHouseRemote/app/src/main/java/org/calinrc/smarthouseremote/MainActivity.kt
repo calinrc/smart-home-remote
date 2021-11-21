@@ -7,7 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.Toast
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
@@ -42,15 +42,18 @@ class MainActivity : AppCompatActivity() {
         ).get(HomeServerModel::class.java)
 
         val statusImage: ImageView = findViewById(R.id.imageView)
+        val textField: TextView = findViewById(R.id.textViewDetails)
 
         homeServerModel.statusResult.observe(this@MainActivity, Observer {
             val result = it ?: return@Observer
             when (result) {
                 is HomeResponse.HomeStatusResponse -> {
                     statusImage.setImageResource(android.R.drawable.presence_online)
+                    //textField.text = result.response
                     //Toast.makeText(this, result.response, Toast.LENGTH_LONG).show()
                 }
                 is HomeResponse.FailedHomeResponse -> {
+                    textField.text = result.exception.message
                     if (result.statusCode/100 == 4){
                         homeServerModel.suspend()
                         statusImage.setImageResource(android.R.drawable.presence_busy)
@@ -75,7 +78,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
-        //homeServerModel.getStatus()
+        homeServerModel.getStatus()
         super.onResume()
     }
 

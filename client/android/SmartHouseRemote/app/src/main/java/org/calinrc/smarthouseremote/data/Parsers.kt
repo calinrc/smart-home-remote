@@ -23,7 +23,7 @@ sealed class HomeResponse {
         }
     }
 
-    data class FailedHomeResponse(val statusCode: Int, val exception: Exception) :
+    data class FailedHomeResponse(val statusCode: Int, val exception: Exception, val isRetriable:Boolean=false) :
         HomeResponse() {
         override fun toString(): String {
             return "$statusCode - ${exception.message}"
