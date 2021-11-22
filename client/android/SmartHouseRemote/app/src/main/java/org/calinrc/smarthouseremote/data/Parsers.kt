@@ -49,19 +49,21 @@ sealed class HomeServerParser<out T>{
 
     abstract fun parse(responseCode: Int, inputStream: InputStream):T
 
-    fun extractStr(inputStream: InputStream):String {
-        val reader = BufferedReader(inputStream.reader())
-        val content = StringBuilder()
-        try {
-            var line = reader.readLine()
-            while (line != null) {
-                content.append(line)
-                line = reader.readLine()
+    companion object {
+        fun extractStr(inputStream: InputStream):String {
+            val reader = BufferedReader(inputStream.reader())
+            val content = StringBuilder()
+            try {
+                var line = reader.readLine()
+                while (line != null) {
+                    content.append(line)
+                    line = reader.readLine()
+                }
+            } finally {
+                reader.close()
             }
-        } finally {
-            reader.close()
+            return content.toString()
         }
-        return content.toString()
     }
 
     class HomeServerStatusResponseParser: HomeServerParser<HomeResponse.HomeStatusResponse>(){

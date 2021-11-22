@@ -1,6 +1,5 @@
 package org.calinrc.smarthouseremote.data
 
-import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException
@@ -8,12 +7,6 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.net.Authenticator
 import java.net.PasswordAuthentication
-
-
-//sealed class Result<out R> {
-//    data class Success<out T>(val data: T) : Result<T>()
-//    data class Error(val exception: Exception) : Result<Nothing>()
-//}
 
 
 class BasicAuthenticator(val username: String, val password: String) : Authenticator() {
@@ -69,21 +62,31 @@ class HomeServerRepository(
                     Authenticator.setDefault(BasicAuthenticator(creds.username, creds.password))
                     (url.openConnection() as? HttpURLConnection)?.run {
                         requestMethod = method
-                        setRequestProperty("Content-Type", "application/json; utf-8")
+                        setRequestProperty("Content-Type", "application/json")
                         setRequestProperty("Accept", "application/json")
                         doOutput = hasOutput
                         connectTimeout = 1000
                         try {
-                            if (hasOutput)
+                            if (hasOutput) {
                                 outputStream.write(body.toByteArray())
+                                outputStream.close()
+                            }
                             val rc = responseCode
-                            if (rc >= 200 && rc < 300)
+                            if (rc / 100 == 2)
                                 parser.parse(responseCode, inputStream)
                             else
+                            {
+                                val message: String = try {
+                                    HomeServerParser.extractStr(errorStream)
+                                } catch (e: Exception) {
+                                    e.printStackTrace()
+                                    "Invalid response code $responseCode"
+                                }
                                 HomeResponse.FailedHomeResponse(
                                     responseCode,
-                                    RuntimeException("Invalid response code $responseCode")
+                                    RuntimeException(message)
                                 )
+                            }
                         } catch (e: java.net.ProtocolException) {
                             HomeResponse.FailedHomeResponse(400, e)
 
