@@ -1,5 +1,6 @@
 package org.calinrc.smarthouseremote.data
 
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException
@@ -73,23 +74,28 @@ class HomeServerRepository(
                             }
                             val rc = responseCode
                             if (rc / 100 == 2)
-                                parser.parse(responseCode, inputStream)
-                            else
-                            {
-                                val message: String = try {
-                                    HomeServerParser.extractStr(errorStream)
+                                try {
+                                    parser.parse(rc, inputStream)
                                 } catch (e: Exception) {
-                                    e.printStackTrace()
-                                    "Invalid response code $responseCode"
+                                    HomeResponse.FailedHomeResponse(
+                                        rc,
+                                        RuntimeException("Unknown failure: " + e.message)
+                                    )
                                 }
+                            else {
                                 HomeResponse.FailedHomeResponse(
-                                    responseCode,
-                                    RuntimeException(message)
+                                    rc,
+                                    RuntimeException(
+                                        try {
+                                            HomeServerParser.extractStr(errorStream)
+                                        } catch (e: Exception) {
+                                            "Invalid response code $rc"
+                                        }
+                                    )
                                 )
                             }
                         } catch (e: java.net.ProtocolException) {
                             HomeResponse.FailedHomeResponse(400, e)
-
                         } catch (ioEx: IOException) {
                             HomeResponse.FailedHomeResponse(500, ioEx)
                         } catch (e: Exception) {
