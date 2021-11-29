@@ -1,47 +1,71 @@
 # smart-home-remote
 Smart Home Remote Control
 
-This project tries to facilitate remote control to some IOT resources deployed localy on home netrok
+This project tries to facilitate remote control to some IOT resources deployed localy on home network
 
 ## Components
 
 ### Hardware
 - RaspberryPI (4) (RPI)
-- 5V Relay board (this board already contains a )
-- 433 MHz Roger Remote control 
+- 220 Ohm resistor - 2 pieces
+- 10k Ohm resistor - 2 pieces
+- PC817 Octocupler  - 2 pieces
+- 2N2222A Transistor - 2 peces
+- 433 MHz Generic Remote control (2 buttons)
+
+Note: schematics for this can be found on [./hardware_schematics/SmartHouseRemote.fzz](./hardware_schematics/SmartHouseRemote.fzz) . The file can be opened using Fritzing Software. 
+```bash
+sudo apt install fritzing
+``` 
+
+
 
 ### Software
- - HTTP service that receive requests from external devices (phone app, web pages) and translates them in GPIO commands for RPI
- - Android phone application preprovisioned with authentication token
+ - Nodered HTTP service that receives requests from external devices (phone app, web pages) and translates them in GPIO commands for RPI. Check [ ./server/nodered/flows.json](./server/nodered/flows.json)
+ - Android phone application preprovisioned with authentication credentials. Check [./client/android/SmartHouseRemote](./client/android/SmartHouseRemote)
 
  ### Use case:
 Phone application will send HTTP requests to web service to manage warious hardware devices (first scenario is to control the 433 Mhz Roger remote control)
 
 
 ### Software Used
-- Raspberry Pi OS Lite
-- Python3 (default version - 3.7.3)
+- Raspberry Pi OS Lite - https://www.raspberrypi.com/software/operating-systems/
+- Nodered for RPI - see https://nodered.org/docs/getting-started/raspberrypi
 
 ### Changes made to default OS
-- Chnage default python from py2 to py3
+- Install nodered on
      ```bash
-     sudo rm /usr/bin/python
-     sudo ln -s /usr/bin/python3 /usr/bin/python
-     ls -l /usr/bin/python
+     sudo apt update
+     sudo apt install nodered
      ```
-- Install pip
+- Install nodered as service
     ```bash
-    sudo apt-get install python3-pip
+    sudo systemctl enable nodered.service
     ```
-- Make pip3 default pip command
+- generate credentials for admin and default user
     ```bash
-    sudo ln -s /usr/bin/pip3 /usr/bin/pip
+    node-red admin hash-pw
     ```
-- Create python virtual environment
-  ```bash
-  sudo apt-get install python3-venv
-  mkdir ~/APPS
-  python -m venv ~/APPS/venv
-  export PATH="/home/pi/APPS/venv/bin:$PATH"
-  pip install RPi.GPIO
-  ```
+- Update nodered admin and user credentials
+   - update `~/.node-red/settings.js` with generated password on following places
+    ```json
+
+    adminAuth: {
+        type: "credentials",
+        users: [{
+            username: "admin",
+            password: "generated_passwd_here",
+            permissions: "*"
+        }]
+    },    
+
+    ...
+
+    httpNodeAuth: {user:"some_user_here",pass:"generated_passwd_here"},
+
+    ```
+
+  Credits:
+
+  - Gaven MacDonald - for its great tutorial about octocuplers and transistors https://youtu.be/pYENAGK8qH4
+  - https://fritzing.org - for their great PCB editor
