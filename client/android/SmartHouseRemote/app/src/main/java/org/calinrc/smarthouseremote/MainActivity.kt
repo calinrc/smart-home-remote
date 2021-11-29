@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
             when (result) {
                 is HomeResponse.HomeStatusResponse -> {
                     statusImage.setImageResource(android.R.drawable.presence_online)
+                    textField.text=""
                     //textField.text = result.response
                     //Toast.makeText(this, result.response, Toast.LENGTH_LONG).show()
                 }
