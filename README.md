@@ -15,12 +15,10 @@ This project tries to facilitate remote control to some IOT resources deployed l
 - 2N2222A Transistor - 2 peces
 - 433 MHz Generic Remote control (2 buttons)
 
-
-### Hardware
 #### V2
 - ESP-12F (ESP8266)
-- 220 Ohm resistor - 2 pieces TBD
-- 10k Ohm resistor - 2 pieces
+- 220 Ohm resistor - 2 pieces
+- TBDk Ohm resistor - 2 pieces
 - PC817 Octocupler  - 2 pieces
 - 2N2222A Transistor - 2 peces
 - 433 MHz Generic Remote control (2 buttons)
