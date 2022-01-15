@@ -29,11 +29,14 @@ void setup()
 {
   Serial.begin(9600);
   Serial.println("Booting...");
+  pinMode(LED_BUILTIN, OUTPUT);
 
   // init wifiConfig
   // to read/write wifi configuration.
   initConf(&wifiConf);
   readWifiConf(&wifiConf);
+  Serial.printf("Try connect to configured accesspoint \"%s\" \n", wifiConf.wifi_ssid);
+  Serial.printf("Webserver username \"%s\" \n", wifiConf.ws_username);
 
   if (!connectToWiFi())
   {
@@ -42,6 +45,8 @@ void setup()
   }
   setUpWebServer(cold_start);
   setUpOverTheAirProgramming();
+  Serial.println("digitalWrite HIGH...");
+  digitalWrite(LED_BUILTIN, HIGH);
 }
 
 bool connectToWiFi()
@@ -153,6 +158,14 @@ void handleChangeStateGate()
   {
     return server.requestAuthentication();
   }
+  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(500);                       // wait for a second
+  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+  delay(500); 
+  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(500);                       // wait for a second
+  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+  delay(500); 
   String message = STATE_CHANGED_GATE_RESP;
   server.send(200, "application/json", message);
 }
@@ -163,6 +176,10 @@ void handleChageStateDoor()
   {
     return server.requestAuthentication();
   }
+  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(1000);                       // wait for a second
+  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+  delay(1000); 
   String message = STATE_CHANGED_DOOR_RESP;
   server.send(200, "application/json", message);
 }
