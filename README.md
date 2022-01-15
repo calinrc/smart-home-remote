@@ -5,8 +5,9 @@ This project tries to facilitate remote control to some IOT resources deployed l
 
 ## Components
 
-## V1
 ### Hardware
+
+#### V1
 - RaspberryPI (4) (RPI)
 - 220 Ohm resistor - 2 pieces
 - 10k Ohm resistor - 2 pieces
@@ -15,8 +16,8 @@ This project tries to facilitate remote control to some IOT resources deployed l
 - 433 MHz Generic Remote control (2 buttons)
 
 
-## V2
 ### Hardware
+#### V2
 - ESP-12F (ESP8266)
 - 220 Ohm resistor - 2 pieces TBD
 - 10k Ohm resistor - 2 pieces
@@ -35,10 +36,9 @@ sudo apt install fritzing
 ### Software
 #### V1
 - Nodered HTTP service that receives requests from external devices (phone app, web pages) and translates them in GPIO commands for RPI. Check [ ./server/nodered/flows.json ](./server/nodered/flows.json)
+- Android phone application preprovisioned with authentication credentials. Check [./client/android/SmartHouseRemote](./client/android/SmartHouseRemote)
 #### V2
 - ESP8266WebServer that receives requests from external devices (phone app, web pages) and translates them in GPIO commands. Check [ ./server/ESPServer/src/main.cpp ](./server/ESPServer/src/main.cpp)
-
-
 - Android phone application preprovisioned with authentication credentials. Check [./client/android/SmartHouseRemote](./client/android/SmartHouseRemote)
 
  ### Use case:
