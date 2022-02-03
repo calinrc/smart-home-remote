@@ -13,7 +13,9 @@ const char* const DOC_FORM = "<h1>Wi-Fi conf</h1><form action='/' method='POST'>
 <div>Webserver user:</div> \
 <div><input type='text' name='ws_user' value='$WSUSER'/></div> \
 <div>Webserver password:</div> \
-<div><input type='text' name='ws_password' value='$WSPASSORD'/></div> \
+<div><input type='password' name='ws_password' value='$WSPASSORD'/></div> \
+<div>OTA password:</div> \
+<div><input type='password' name='ota_password' value='$OTAPASSORD'/></div> \
 <div><input type='submit' value='Save'/></div></form>";
 
 

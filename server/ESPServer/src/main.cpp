@@ -15,10 +15,13 @@ bool cold_start = false;
 // 80 is the default http port.
 ESP8266WebServer server(1880);
 
+static const uint8_t GATE_PIN = D1;
+static const uint8_t DOOR_PIN = D2;
+
 bool connectToWiFi();
 void setUpAccessPoint();
 void setUpWebServer(bool coldStart);
-void setUpOverTheAirProgramming();
+void setUpOverTheAirProgramming(bool coldStart);
 
 void handleColdStateWebServerRequest();
 void handleStateGet();
@@ -30,6 +33,8 @@ void setup()
   Serial.begin(9600);
   Serial.println("Booting...");
   pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(GATE_PIN, OUTPUT);
+  pinMode(DOOR_PIN, OUTPUT);
 
   // init wifiConfig
   // to read/write wifi configuration.
@@ -44,9 +49,11 @@ void setup()
     setUpAccessPoint();
   }
   setUpWebServer(cold_start);
-  setUpOverTheAirProgramming();
-  Serial.println("digitalWrite HIGH...");
+  setUpOverTheAirProgramming(cold_start);
   digitalWrite(LED_BUILTIN, HIGH);
+  Serial.printf("Cold start %d \n", cold_start);
+  Serial.println("Setup completed ...");
+
 }
 
 bool connectToWiFi()
@@ -110,6 +117,7 @@ void handleColdStateWebServerRequest()
     server.arg("password").toCharArray(wifiConf.wifi_password, sizeof(wifiConf.wifi_password));
     server.arg("ws_user").toCharArray(wifiConf.ws_username, sizeof(wifiConf.ws_username));
     server.arg("ws_password").toCharArray(wifiConf.ws_password, sizeof(wifiConf.ws_password));
+    server.arg("ota_password").toCharArray(wifiConf.ota_password, sizeof(wifiConf.ota_password));
 
     Serial.println(server.arg("ssid"));
     Serial.println(wifiConf.wifi_ssid);
@@ -132,6 +140,7 @@ void handleColdStateWebServerRequest()
     form.replace("$PASSWORD", wifiConf.wifi_password);
     form.replace("$WSUSER", wifiConf.ws_username);
     form.replace("$WSPASSORD", wifiConf.ws_password);
+    form.replace("$OTAPASSORD", wifiConf.ota_password);
     message += form;
   }
 
@@ -158,16 +167,13 @@ void handleChangeStateGate()
   {
     return server.requestAuthentication();
   }
-  digitalWrite(LED_BUILTIN, LOW);   // turn the LED on (HIGH is the voltage level)
-  delay(500);                       // wait for a second
-  digitalWrite(LED_BUILTIN, HIGH);    // turn the LED off by making the voltage LOW
-  delay(500); 
-  digitalWrite(LED_BUILTIN, LOW);   // turn the LED on (HIGH is the voltage level)
-  delay(500);                       // wait for a second
-  digitalWrite(LED_BUILTIN, HIGH);    // turn the LED off by making the voltage LOW
-  delay(500); 
   String message = STATE_CHANGED_GATE_RESP;
   server.send(200, "application/json", message);
+  digitalWrite(GATE_PIN, HIGH);
+  digitalWrite(LED_BUILTIN, LOW);  // turn the LED on (LOW is the voltage level)
+  delay(1000);                      // wait for a second
+  digitalWrite(GATE_PIN, LOW);
+  digitalWrite(LED_BUILTIN, HIGH); // turn the LED off by making the voltage HIGH
 }
 
 void handleChageStateDoor()
@@ -176,15 +182,17 @@ void handleChageStateDoor()
   {
     return server.requestAuthentication();
   }
-  digitalWrite(LED_BUILTIN, LOW);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);                       // wait for a second
-  digitalWrite(LED_BUILTIN, HIGH);    // turn the LED off by making the voltage LOW
-  delay(1000); 
   String message = STATE_CHANGED_DOOR_RESP;
   server.send(200, "application/json", message);
+  digitalWrite(DOOR_PIN, HIGH);
+  digitalWrite(LED_BUILTIN, LOW);  // turn the LED on (LOW is the voltage level)
+  delay(1000);                     // wait for a second
+  digitalWrite(DOOR_PIN, LOW);
+  digitalWrite(LED_BUILTIN, HIGH); // turn the LED off by making the voltage HIGH
+
 }
 
-void setUpOverTheAirProgramming()
+void setUpOverTheAirProgramming(bool coldStart)
 {
 
   // Change OTA port.
@@ -198,7 +206,9 @@ void setUpOverTheAirProgramming()
 
   // Re-programming passowrd.
   // No password by default.
-  // ArduinoOTA.setPassword("1234");
+  if (!cold_start){
+    ArduinoOTA.setPassword(wifiConf.ota_password);
+  }
 
   ArduinoOTA.begin();
 }

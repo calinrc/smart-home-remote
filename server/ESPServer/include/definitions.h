@@ -9,6 +9,7 @@ struct WifiConf
   char wifi_password[50];
   char ws_username[50];
   char ws_password[50];
+  char ota_password[50];
   // Make sure that there is a 0
   // that terminatnes the c string
   // if memory is not initalized yet.
