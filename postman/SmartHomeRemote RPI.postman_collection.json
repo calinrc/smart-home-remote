@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "bb912f6e-5291-468d-a6e9-fddc8283ed5c",
+		"name": "SmartHomeRemote RPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "State Request",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"state\":\"query\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{RPI_HOST}}:{{RPI_PORT}}/home/state",
+					"protocol": "http",
+					"host": [
+						"{{RPI_HOST}}"
+					],
+					"port": "{{RPI_PORT}}",
+					"path": [
+						"home",
+						"state"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Gate State",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"home\":{\"gate\":\"change\"}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{RPI_HOST}}:{{RPI_PORT}}/home/gate",
+					"protocol": "http",
+					"host": [
+						"{{RPI_HOST}}"
+					],
+					"port": "{{RPI_PORT}}",
+					"path": [
+						"home",
+						"gate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Door State",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"home\":{\"door\":\"change\"}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{RPI_HOST}}:{{RPI_PORT}}/home/door",
+					"protocol": "http",
+					"host": [
+						"{{RPI_HOST}}"
+					],
+					"port": "{{RPI_PORT}}",
+					"path": [
+						"home",
+						"door"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Some Unknown Path",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"home\":{\"door\":\"change\"}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{RPI_HOST}}:{{RPI_PORT}}/some/unknown/path",
+					"protocol": "http",
+					"host": [
+						"{{RPI_HOST}}"
+					],
+					"port": "{{RPI_PORT}}",
+					"path": [
+						"some",
+						"unknown",
+						"path"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "{{WS_USER}}",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "{{WS_PASSWD}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

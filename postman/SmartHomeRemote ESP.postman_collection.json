@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "5f96342d-c915-4f8b-8c57-103b8320c517",
+		"name": "SmartHomeRemote ESP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "State Request ESP",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"state\":\"query\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ESP_HOST}}:{{ESP_PORT}}/home/state",
+					"protocol": "http",
+					"host": [
+						"{{ESP_HOST}}"
+					],
+					"port": "{{ESP_PORT}}",
+					"path": [
+						"home",
+						"state"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Gate State ESP",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"home\":{\"gate\":\"change\"}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ESP_HOST}}:{{ESP_PORT}}/home/gate",
+					"protocol": "http",
+					"host": [
+						"{{ESP_HOST}}"
+					],
+					"port": "{{ESP_PORT}}",
+					"path": [
+						"home",
+						"gate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Door State ESP",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"home\":{\"door\":\"change\"}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ESP_HOST}}:{{ESP_PORT}}/home/door",
+					"protocol": "http",
+					"host": [
+						"{{ESP_HOST}}"
+					],
+					"port": "{{ESP_PORT}}",
+					"path": [
+						"home",
+						"door"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Some Unknown Path",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"home\":{\"door\":\"change\"}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ESP_HOST}}:{{ESP_PORT}}/some/unknown/path",
+					"protocol": "http",
+					"host": [
+						"{{ESP_HOST}}"
+					],
+					"port": "{{ESP_PORT}}",
+					"path": [
+						"some",
+						"unknown",
+						"path"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "{{WS_USER}}",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "{{WS_PASSWD}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
