@@ -18,6 +18,8 @@ YwRobot Breadboard was mounted as well in some female header jumper connectors
 
 ![pic_3](pic_3.png)
 
+Mounted Roger 433 Mhz remote board.
+
 ![pic_4](pic_4.png)
 
 Back image of perfboard.
