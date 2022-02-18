@@ -5,13 +5,13 @@ This project tries to facilitate the remote control of some IOT resources deploy
 
 ## Description
 
-The story behind this project is based on several broken Roger H80/TX22 remotes that layed on my cabinet that used to control the front gate or garage door.
-In many cases I ended up buying new remotes or clone of them due to the fact that plastic shell of previous remotes broked or the battery connection was not stable.
+The story behind this project is based on several broken Roger H80/TX22 remote controls. These used to control the front gate or garage door.
+In many cases I ended up buying new remotes or clones of them due to the fact that the plastic shell of the previous remote controles broke or the battery connection was not stable.
 
 For this reason I decided to dismantle one of the original remotes and link their buttons to some handcrafted circuits that act as basic switches.
 
-First approach was to use a RasberryPI as a webserver that coordinates the GPIO pins, linked via some octocuplers to remotes buttons. 
-Soon I have realized that this keeps my RPI 4 linked to this project and I can not use it anymore to another one, so I decided to replaces with something cheaper component, and this ended up in the V2 project where I have used an ESP-12F as web server and GPIO controler.
+The first approach was to use a RasberryPI as a webserver that coordinates the GPIO pins, linked via some octocuplers to the buttons of the remotes. 
+Soon I realized that this keeps my RPI 4 linked to this project and I cannot use it anymore to another one, so I decided to replace it with something cheaper. This ended up in the V2 project where I have used an ESP-12F as web server and GPIO controller.
 
 
 ## Components
@@ -35,6 +35,8 @@ Soon I have realized that this keeps my RPI 4 linked to this project and I can n
 - 433 MHz Generic Remote control (2 buttons)
 - YwRobot Breadboard Power Supply
 - 12 V power supply
+
+*** 
 
 ## ![Images for final boards](./pictures/README.md)
 

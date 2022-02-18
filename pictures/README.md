@@ -28,6 +28,6 @@ Back image of perfboard.
 
 The entire circuit was was monted in some plastic box bought from local electric store. 
 
-The drowings are made by my son. :) 
+The drawings are made by my son. :) 
 
 ![pic_6](pic_6.png)
