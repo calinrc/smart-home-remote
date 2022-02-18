@@ -3,7 +3,7 @@ Smart Home Remote Control
 
 This project tries to facilitate the remote control of some IOT resources deployed localy on my home network.
 
-### Description
+## Description
 
 The story behind this project is based on several broken Roger H80/TX22 remotes that layed on my cabinet that used to control the front gate or garage door.
 In many cases I ended up buying new remotes or clone of them due to the fact that plastic shell of previous remotes broked or the battery connection was not stable.
@@ -36,20 +36,22 @@ Soon I have realized that this keeps my RPI 4 linked to this project and I can n
 - YwRobot Breadboard Power Supply
 - 12 V power supply
 
-![Images for final boards](./pictures/README.md)
+## ![Images for final boards](./pictures/README.md)
 
-Note: schematics for this can be found on [./hardware_schematics/SmartHouseRemote.fzz](./hardware_schematics/SmartHouseRemote.fzz) . The file can be opened using Fritzing Software. 
+## Schematics
+
+Schematics for this can be found on [./hardware_schematics/SmartHouseRemote.fzz](./hardware_schematics/SmartHouseRemote.fzz) . The file can be opened using Fritzing Software. 
 ```bash
 sudo apt install fritzing
 ``` 
 
 
-
-### Software
-#### V1
+## Software used
+### V1
 - Nodered HTTP service that receives requests from external devices (phone app, web pages) and translates them in GPIO commands for RPI. Check [ ./server/nodered/flows.json ](./server/nodered/flows.json)
 - Android phone application preprovisioned with authentication credentials. Check [./client/android/SmartHouseRemote](./client/android/SmartHouseRemote)
-#### V2
+
+### V2
 - ESP8266WebServer that receives requests from external devices (phone app, web pages) and translates them in GPIO commands. Check [ ./server/ESPServer/src/main.cpp ](./server/ESPServer/src/main.cpp)
 - Android phone application preprovisioned with authentication credentials. Check [./client/android/SmartHouseRemote](./client/android/SmartHouseRemote)
 
@@ -57,8 +59,10 @@ sudo apt install fritzing
 Phone application will send HTTP requests to web service to manage warious hardware devices (first scenario is to control the 433 Mhz Roger remote control)
 
 
-### Software Used
-#### V1 - RaspberryPI
+
+## Software Installation
+
+### V1 - RaspberryPI 
 - Raspberry Pi OS Lite - https://www.raspberrypi.com/software/operating-systems/
 - Nodered for RPI - see https://nodered.org/docs/getting-started/raspberrypi
 
@@ -95,14 +99,14 @@ Changes made to default Raspbian OS
 
     ```
 
-#### V2
+### V2
 - ESP-12F - ESP8266 Arduino Firmware
 - Libraries
     - ESP8266WebServer
     - ArduinoOTA
     - ESP8266WiFi
 
-Credits:
+## Credits:
 
 - Gaven MacDonald - for its tutorial about octocuplers and transistors https://youtu.be/pYENAGK8qH4
 - Indrek Luuk - for ESP wiring and programming tutorials https://circuitjournal.com/esp8266-with-arduino-ide
