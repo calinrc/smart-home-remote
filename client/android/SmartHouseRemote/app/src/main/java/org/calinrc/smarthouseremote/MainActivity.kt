@@ -64,6 +64,9 @@ class MainActivity : AppCompatActivity() {
                         //Toast.makeText(this, result.statusCode.toString(), Toast.LENGTH_LONG).show()
                     }
                 }
+                else -> {
+
+                }
             }
         })
         val gateButton: Button = findViewById(R.id.button_gate)
