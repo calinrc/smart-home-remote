@@ -15,7 +15,7 @@
     <string name="door">Door</string>
     <string name="status">Status</string>
 
-    <string name="primary_action_title">Open Door</string>
-    <string name="secondary_action_title">Open Gate</string>
+    <string name="door_state_change_action_title">The door state changed</string>
+    <string name="gate_state_change_action_title">The gate state changed</string>
     <string name="status_msg_text">Status OK.</string>
 </resources>

@@ -1,4 +1,4 @@
-package org.calinrc.smarthouseremote
+package org.calinrc.smarthouseremote.auto
 
 import android.content.Intent
 import android.content.pm.ApplicationInfo

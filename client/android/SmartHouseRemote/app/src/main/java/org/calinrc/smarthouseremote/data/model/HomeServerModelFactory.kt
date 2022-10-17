@@ -12,8 +12,8 @@ class HomeServerModelFactory(private val creds: ServerCredentials,
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(HomeServerModel::class.java)) {
-            return HomeServerModel(homeServerRepo = HomeServerRepository(creds, parserFactory)
+        if (modelClass.isAssignableFrom(ViewModelHomeServerModel::class.java)) {
+            return ViewModelHomeServerModel(homeServerRepo = HomeServerRepository(creds, parserFactory)
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
