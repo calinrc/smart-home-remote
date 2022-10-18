@@ -29,41 +29,51 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.097"
         app:srcCompat="@android:drawable/presence_offline"
-        tools:srcCompat="@android:drawable/presence_busy" />
-
-    <Button
-        android:id="@+id/button_gate"
-        android:layout_width="330dp"
-        android:layout_height="93dp"
-        android:text="@string/gate"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_door"
-        app:layout_constraintVertical_bias="0.48" />
-
-    <Button
-        android:id="@+id/button_door"
-        android:layout_width="330dp"
-        android:layout_height="93dp"
-        android:text="@string/door"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDetails"
-        app:layout_constraintVertical_bias="0.355" />
+        tools:srcCompat="@android:drawable/presence_busy"
+        android:contentDescription="@string/image_content_description" />
 
     <TextView
         android:id="@+id/textViewDetails"
-        android:layout_width="198dp"
-        android:layout_height="83dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
         android:text=""
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.153" />
+
+    <LinearLayout
+        android:id="@+id/LinearLayout02"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDetails"
+        app:layout_constraintVertical_bias="0.5">
+
+        <Button
+            android:id="@+id/button_door"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:insetLeft="20dp"
+            android:insetRight="20dp"
+            android:text="@string/door" />
+
+        <Button
+            android:id="@+id/button_gate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:insetLeft="20dp"
+            android:insetRight="20dp"
+            android:text="@string/gate" />
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,4 +18,6 @@
     <string name="door_state_change_action_title">The door state changed</string>
     <string name="gate_state_change_action_title">The gate state changed</string>
     <string name="status_msg_text">Status</string>
+    <string name="image_content_description">Status Image</string>
+
 </resources>
