@@ -20,7 +20,6 @@ import org.calinrc.smarthouseremote.data.model.HomeServerModel
 class AndroidAutoMainScreen(carContext: CarContext) : Screen(carContext), DefaultLifecycleObserver {
 
     private var resIconId:Int = android.R.drawable.presence_online
-    private var textMsg:String = carContext.getString(R.string.status_msg_text)
     private val homeServerModel: HomeServerModel
     init {
         lifecycle.addObserver(this)
@@ -46,11 +45,17 @@ class AndroidAutoMainScreen(carContext: CarContext) : Screen(carContext), Defaul
             when (result) {
                 is HomeResponse.HomeStatusResponse -> {
                     resIconId = android.R.drawable.presence_online
-                    textMsg = carContext.getString(R.string.status_msg_text)
                     invalidate()
                 }
                 is HomeResponse.FailedHomeResponse -> {
-                    textMsg = result.exception.message?: "Failed"
+//                    val textMsg = result.exception.message?: "Failed"
+//
+//                    CarToast.makeText(
+//                        carContext,
+//                        textMsg,
+//                        CarToast.LENGTH_SHORT
+//                    ).show()
+
                     resIconId = if (result.statusCode / 100 == 4) {
                         homeServerModel.suspendStatusPooling()
                         android.R.drawable.presence_busy
@@ -103,7 +108,7 @@ class AndroidAutoMainScreen(carContext: CarContext) : Screen(carContext), Defaul
             }
 
         return MessageTemplate.Builder(
-           textMsg
+            carContext.getString(R.string.status_msg_text)
         )
             .setTitle(carContext.getString(R.string.app_name))
             .setIcon(
@@ -112,9 +117,9 @@ class AndroidAutoMainScreen(carContext: CarContext) : Screen(carContext), Defaul
                         carContext,
                         resIconId
                     )
-                )
-                    .setTint(CarColor.GREEN)
-                    .build()
+                ).build()
+
+
             )
             .addAction(doorActionBuilder.build())
             .addAction(gateActionBuilder.build())
