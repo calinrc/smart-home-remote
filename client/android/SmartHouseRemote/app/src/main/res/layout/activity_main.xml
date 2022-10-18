@@ -35,7 +35,7 @@
     <TextView
         android:id="@+id/textViewDetails"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:text=""
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
