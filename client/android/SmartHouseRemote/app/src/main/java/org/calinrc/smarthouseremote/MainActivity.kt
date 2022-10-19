@@ -1,22 +1,25 @@
 package org.calinrc.smarthouseremote
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
-import org.calinrc.smarthouseremote.data.ServerCredentials
 import org.calinrc.smarthouseremote.data.HomeResponse
 import org.calinrc.smarthouseremote.data.ParsersFactory
-import org.calinrc.smarthouseremote.data.model.ViewModelHomeServerModel
+import org.calinrc.smarthouseremote.data.ServerCredentials
 import org.calinrc.smarthouseremote.data.model.HomeServerModelFactory
+import org.calinrc.smarthouseremote.data.model.ViewModelHomeServerModel
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -89,6 +92,12 @@ class MainActivity : AppCompatActivity() {
             ).show()
         }
 
+        val staticImageView: ImageView = findViewById(R.id.imageViewStatic)
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            staticImageView.visibility = View.INVISIBLE
+        }else{
+            staticImageView.visibility = View.VISIBLE
+        }
 
     }
 
