@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutActivity">
+
+    <TextView
+        android:id="@+id/textViewAbout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/about_text"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewGithubText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewGithubText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/github_text"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewGithubLink"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAbout" />
+
+    <TextView
+        android:id="@+id/textViewGithubLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:autoLink="web"
+        android:minHeight="48dp"
+        android:text="@string/github_link"
+        android:textColor="#00838F"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewAbout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGithubText"
+        tools:ignore="TextContrastCheck" />
+
+    <ImageView
+        android:id="@+id/imageViewAbout"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="100dp"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGithubLink"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/house_v3" />
+</androidx.constraintlayout.widget.ConstraintLayout>

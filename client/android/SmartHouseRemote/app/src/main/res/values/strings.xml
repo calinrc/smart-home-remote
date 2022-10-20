@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">SmartHouseRemote</string>
     <string name="action_settings">Settings</string>
+    <string name="action_about">About</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_about">AboutActivity</string>
 
     <!-- Preference Titles -->
     <string name="credentials_header">Credentials</string>
@@ -19,5 +21,9 @@
     <string name="gate_state_change_action_title">Gate state changed</string>
     <string name="status_msg_text">Status</string>
     <string name="image_content_description">Status Image</string>
+    <string name="about_text">This is a open source project created under Apache License Version 2.0 for a small personal home automation system </string>
+    <string name="github_text">All sources and hardware designs are available on:</string>
+    <string name="github_link">https://github.com/calinrc/smart-home-remote</string>
+    <string name="todo">TODO</string>
 
 </resources>

@@ -138,6 +138,13 @@ class MainActivity : AppCompatActivity() {
                 //findNavController(R.id.nav_host_fragment_content_main)
                 true
             }
+            R.id.action_about -> {
+                val intent = Intent(this, AboutActivity::class.java)
+                startActivity(intent)
+                //findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_FirstFragment_to_SecondFragment)
+                //findNavController(R.id.nav_host_fragment_content_main)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
