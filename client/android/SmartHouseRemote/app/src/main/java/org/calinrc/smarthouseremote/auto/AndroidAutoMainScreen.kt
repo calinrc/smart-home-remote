@@ -1,5 +1,6 @@
 package org.calinrc.smarthouseremote.auto
 
+import android.graphics.BitmapFactory
 import androidx.car.app.CarContext
 import androidx.car.app.CarToast
 import androidx.car.app.Screen
@@ -19,8 +20,10 @@ import org.calinrc.smarthouseremote.data.model.HomeServerModel
 
 class AndroidAutoMainScreen(carContext: CarContext) : Screen(carContext), DefaultLifecycleObserver {
 
-    private var resIconId:Int = android.R.drawable.presence_online
+    private var resIconId: Int = android.R.drawable.presence_online
     private val homeServerModel: HomeServerModel
+    private val mPaneImage: IconCompat
+
     init {
         lifecycle.addObserver(this)
         val sharedPreferences =
@@ -29,13 +32,20 @@ class AndroidAutoMainScreen(carContext: CarContext) : Screen(carContext), Defaul
         val username = sharedPreferences.getString("username", "")
         val password = sharedPreferences.getString("password", "")
 
-        homeServerModel = HomeServerModel(homeServerRepo = HomeServerRepository(
-            ServerCredentials(
+        val resources = carContext.resources
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.house_v3)
+        mPaneImage = IconCompat.createWithBitmap(bitmap)
+
+
+        homeServerModel = HomeServerModel(
+            homeServerRepo = HomeServerRepository(
+                ServerCredentials(
                     serverUrl ?: "",
                     username ?: "",
                     password ?: ""
                 ), ParsersFactory()
-        ), coroutineScope = lifecycle.coroutineScope)
+            ), coroutineScope = lifecycle.coroutineScope
+        )
     }
 
     override fun onStart(owner: LifecycleOwner) {
@@ -84,7 +94,7 @@ class AndroidAutoMainScreen(carContext: CarContext) : Screen(carContext), Defaul
 
     override fun onGetTemplate(): Template {
         val doorActionBuilder = Action.Builder()
-            .setBackgroundColor(CarColor.GREEN)
+            .setBackgroundColor(CarColor.BLUE)
             .setTitle(carContext.getString(R.string.door))
             .setOnClickListener {
                 homeServerModel.changeDoorState()
@@ -96,7 +106,7 @@ class AndroidAutoMainScreen(carContext: CarContext) : Screen(carContext), Defaul
             }
 
         val gateActionBuilder = Action.Builder()
-            .setBackgroundColor(CarColor.GREEN)
+            .setBackgroundColor(CarColor.BLUE)
             .setTitle(carContext.getString(R.string.gate))
             .setOnClickListener {
                 homeServerModel.changeGateState()
@@ -107,23 +117,33 @@ class AndroidAutoMainScreen(carContext: CarContext) : Screen(carContext), Defaul
                 ).show()
             }
 
-        return MessageTemplate.Builder(
-            carContext.getString(R.string.status_msg_text)
+        val paneBuilder = Pane.Builder()
+
+        paneBuilder.addRow(
+            Row.Builder()
+                .setTitle(carContext.getString(R.string.app_name))
+                .build()
         )
-            .setTitle(carContext.getString(R.string.app_name))
-            .setIcon(
-                CarIcon.Builder(
-                    IconCompat.createWithResource(
-                        carContext,
-                        resIconId
-                    )
-                ).build()
 
+        paneBuilder.addRow(
+            Row.Builder()
+                .setTitle(carContext.getString(R.string.status_msg_text))
+                .setImage(
+                    CarIcon.Builder(
+                        IconCompat.createWithResource(
+                            carContext,
+                            resIconId
+                        )
+                    ).build(), Row.IMAGE_TYPE_LARGE
+                )
+                .build()
+        )
 
-            )
-            .addAction(doorActionBuilder.build())
+//        // Also set a large image outside of the rows.
+        paneBuilder.setImage(CarIcon.Builder(mPaneImage).build())
+        paneBuilder.addAction(doorActionBuilder.build())
             .addAction(gateActionBuilder.build())
-            .build()
+        return PaneTemplate.Builder(paneBuilder.build()).build()
     }
 
 }
