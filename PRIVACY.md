@@ -5,7 +5,7 @@ Last updated: October 24, 2022
 
 # Collecting and Using Your Personal Data
 
-SmartHomeRemote android application store one your device the settings information to access the SmartHomeRemote server instance.
+SmartHomeRemote android application store on your device the settings information to access the SmartHomeRemote server instance.
 This information contains the host and port of your server along with user and password set for it.
 Thease credentials are not shared with anyone else and are used exclusively to authenticate in your service instance.
 
