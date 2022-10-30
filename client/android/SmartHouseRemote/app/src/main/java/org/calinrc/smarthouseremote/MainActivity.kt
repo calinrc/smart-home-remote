@@ -46,19 +46,19 @@ class MainActivity : AppCompatActivity() {
         )[ViewModelHomeServerModel::class.java]
 
         val statusImage: ImageView = findViewById(R.id.imageView)
-        val textField: TextView = findViewById(R.id.textViewDetails)
+        val textViewDetails: TextView = findViewById(R.id.textViewDetails)
 
         homeServerModel.statusResult.observe(this@MainActivity, Observer {
             val result = it ?: return@Observer
             when (result) {
                 is HomeResponse.HomeStatusResponse -> {
                     statusImage.setImageResource(android.R.drawable.presence_online)
-                    textField.text = ""
+                    textViewDetails.text = ""
                     //textField.text = result.response
                     //Toast.makeText(this, result.response, Toast.LENGTH_LONG).show()
                 }
                 is HomeResponse.FailedHomeResponse -> {
-                    textField.text = result.exception.message
+                    textViewDetails.text = result.exception.message
                     if (result.statusCode / 100 == 4) {
                         homeServerModel.suspendStatusPooling()
                         statusImage.setImageResource(android.R.drawable.presence_busy)
@@ -92,11 +92,16 @@ class MainActivity : AppCompatActivity() {
             ).show()
         }
 
+        val textView:TextView = findViewById(R.id.textView)
         val staticImageView: ImageView = findViewById(R.id.imageViewStatic)
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            staticImageView.visibility = View.INVISIBLE
+            textView.visibility = View.GONE
+            staticImageView.visibility = View.GONE
+            textViewDetails.visibility = View.GONE
         }else{
+            textView.visibility = View.VISIBLE
             staticImageView.visibility = View.VISIBLE
+            textViewDetails.visibility = View.VISIBLE
         }
 
     }
