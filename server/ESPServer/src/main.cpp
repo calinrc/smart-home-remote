@@ -224,4 +224,13 @@ void loop()
   // This must be called regularly
   // for the webserver to work.
   server.handleClient();
+  if (cold_start){
+    long int since = millis();
+    if (since > 3*60*1000){
+      Serial.println("More than 3 minutes without any chnages in wifi settings. Rebooting...");
+      delay(1000);
+      ESP.restart();
+    }
+  }
+  
 }
