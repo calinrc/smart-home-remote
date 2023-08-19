@@ -24,6 +24,7 @@
     <string name="about_text">This is a open source project created under Apache License Version 2.0 for a small personal home automation system </string>
     <string name="github_text">All sources and hardware designs are available on:</string>
     <string name="github_link">https://github.com/calinrc/smart-home-remote</string>
+    <string name="version">Version: 1.2.3</string>
     <string name="todo">TODO</string>
 
 </resources>
