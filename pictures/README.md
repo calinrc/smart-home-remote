@@ -6,6 +6,10 @@
 - Single Layer Perfboard
 
 
+Schematics
+
+![pic_7](pic_7.png)
+
 
 ![pic_1](pic_1.png)
 
