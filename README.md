@@ -29,7 +29,7 @@ Soon I realized that this keeps my RPI 4 linked to this project and I cannot use
 #### V2
 - ESP-12F (ESP8266)
 - 220 Ohm resistor - 2 pieces
-- 100 Ohm resistor - 2 pieces
+- 100 Ohm resistor - 1 pieces
 - 100 uF capacitor - 1 piece
 - PC817 Octocupler  - 2 pieces
 - 2N2222A Transistor - 2 peces
