@@ -32,6 +32,11 @@ android {
     }
     compileSdk 33
     namespace 'org.calinrc.smarthouseremote'
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging false
+        }
+    }
 }
 
 dependencies {
